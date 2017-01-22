@@ -1,4 +1,4 @@
- Code Fellows PDX
- ===
+Code Fellows PDX
+===
 
- ## 401 Advanced Software Development in Full Stack JavaScript
+## 401 Advanced Software Development in Full Stack JavaScript
