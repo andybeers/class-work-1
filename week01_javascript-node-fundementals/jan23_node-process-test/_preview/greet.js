@@ -1,3 +1,3 @@
 const name = process.argv[2];
-const message = name ? `hello ${name}` : 'why so shy?';
+const message = `hello ${name}`;
 process.stdout.write(message);
