@@ -20,6 +20,7 @@
 * Ryver
 * Canvas
 * VSCode
+* Class Google Calendar
 
 ### Schedule and Structure
 
