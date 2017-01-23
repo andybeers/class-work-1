@@ -73,13 +73,13 @@ Project Week:
         * less senior? voice questions, raise issues, by senior in other areas
 
 ### Standards
-* Uphold Code of Conduct - Be Kind
+* Uphold [Code of Conduct](https://github.com/codefellows/code-of-conduct) - Be Kind
 * Make sure everyone has equity in opportunity to:
     * Speak, Ideate, and Lead
 
 #### Lab Expectations
 * Evidence of Refactoring and Code Improvement
-* No cut-n-paste of other's code - Kinesthetic Learning
+* No cut-n-paste of other's code - Kinesthetic Learning 
 * Own your repo, know lab process
 * Unless explicitly mentioned otherwise, labs can be done collaboratively
 

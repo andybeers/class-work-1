@@ -93,7 +93,7 @@ Control keywords:
 * `if` and `else`
 * `for`, `while`, (and rarely `do`)
 * `switch` and `case`
-* `function`???
+* (`function`???)
 
 #### Variables
 

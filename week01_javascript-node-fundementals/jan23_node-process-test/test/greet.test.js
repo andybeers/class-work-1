@@ -1,20 +1,15 @@
 var child_process = require('child_process');
 var assert = require('assert');
+var run = require('./run.js')
 
-function run(args) {
-    return child_process.execFileSync(
-        'node',
-        args,
-        { encoding: 'utf8' }
-    );
-}
+describe('greeting app', function() {
+    it('greets by name', function() {
+        var output = run(['greet.js', 'marty']);
+        assert.equal(output, 'hello marty');
+    });
 
-it('greets by name', function() {
-    var output = run(['greet.js', 'marty']);
-    assert.equal(output, 'hello marty');
-});
-
-it('uses "stranger" as a default when no name provided', function() {
-    var output = run(['greet.js']);
-    assert.equal(output, 'hello stranger');
+    it('uses "stranger" as a default when no name provided', function() {
+        var output = run(['greet.js']);
+        assert.equal(output, 'hello stranger');
+    });
 });
