@@ -27,7 +27,20 @@
 ## Node.js
 
 * Single threaded!
-* Install...
+
+* Do we need to install? Check version:
+```
+> node --version
+// something > 6
+```
+
+* Install globally without `sudo`
+```
+> npm install -g mocha
+...
+> mocha --version
+```
+
 
 ### JavaScript
 
