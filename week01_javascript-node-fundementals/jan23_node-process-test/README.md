@@ -65,9 +65,10 @@ TDD is a development process that utilizes testing as part of the process
 Why TDD?
 
 Cycle:
-    * Red - Write a failing test
-    * Green - Make in pass with simpliest possible code
-    * Refactor - Improve code without changing functionality
+
+* Red - Write a failing test
+* Green - Make in pass with simpliest possible code
+* Refactor - Improve code without changing functionality
 
 ### Demo
 

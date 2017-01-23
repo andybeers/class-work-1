@@ -20,7 +20,11 @@
 * Ryver
 * Canvas
 * VSCode
+* Github
+    * Class Org: https://github.com/cfpdx-401d5
+    * Class Work Repo: https://github.com/cfpdx-401d5/class-work
 * Class Google Calendar
+
 
 ### Schedule and Structure
 
