@@ -15,6 +15,12 @@
 * Facility Information
 * Student Director
 
+### New (and existing) Systems
+
+* Ryver
+* Canvas
+* VSCode
+
 ### Schedule and Structure
 
 Daily:
@@ -63,7 +69,7 @@ Project Week:
 
 ### Standards
 * Uphold Code of Conduct - Be Kind
-* Make sure everyone has equally has opportunity to:
+* Make sure everyone has equity in opportunity to:
     * Speak, Ideate, and Lead
 
 #### Lab Expectations
