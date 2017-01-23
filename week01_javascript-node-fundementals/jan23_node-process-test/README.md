@@ -58,9 +58,10 @@ Cycle:
 ### Demo
 
 1. TDD Greeting Console app
-2. Introduce `mocha` and `assert`
+1. Debugging Node with VSCode
+1. Introduce `mocha` and `assert`
 
-## Review Lab
+## Review Lab Assignment
 
 ## Advanced JavaScript
 
