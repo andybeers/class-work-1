@@ -6,3 +6,7 @@ var name = process.argv[2] || 'stranger';
 // if(!name) name = 'stranger';
 
 process.stdout.write(`hello ${name}`);
+
+// you can make multiple writes to stdout...
+// process.stdout.write('hello ');
+// process.stdout.write(name);
