@@ -3,10 +3,14 @@
 
 ## Issues and Questions
 * My canvas account was set to mtn time. Let's standardize on 1pm!
-* Questions?
+* Questions from material and lab?
 
-## Personal Training
-* Overview from Amy
+## Course Overview
+
+## ES6
+
+* New kata assignments!
+* `let` and `const`
 
 ## Tools
 
@@ -15,10 +19,8 @@
 * `"extends": "eslint:recommended"`
 * [rules](http://eslint.org/docs/rules/)
 
-## ES6
-
-* New kata assignments!
-* `let` and `const`
+## Personal Training
+* Overview from Amy
 
 ## Learning Objectives
 * Install and track third party module dependencies 
@@ -35,6 +37,16 @@ schema of Semantic Versioning
 ## Agenda
 
 ### Importing and Exporting Modules
+* Why Module?
+    * Readability
+    * Organization
+    * Seperation of Concerns
+    * Namespace ("global" scope per file)
+    * Reduce Merge Conflicts
+* Passing things between modules?
+    * 301 - Using Global namespace has Issues
+    * Define mechanism for "exporting" and "importing"
+    * (not every file has to have a wrapping IIFE)
 * `module.exports =`
 * `= require()`
     * relative path from current file
@@ -64,4 +76,13 @@ schema of Semantic Versioning
     * `--`
 * Project Organization
     * `./lib` folder
+
+## Versioning
+
+* Semver
+    * major - break
+    * minor - add
+    * patch - fiz
+
+* CHANGELOG
 
