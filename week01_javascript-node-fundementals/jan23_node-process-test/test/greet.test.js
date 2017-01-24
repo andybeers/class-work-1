@@ -1,6 +1,5 @@
-var child_process = require('child_process');
 var assert = require('assert');
-var run = require('./run.js')
+var run = require('./run.js');
 
 describe('greeting app', function() {
     it('greets by name', function() {
