@@ -9,7 +9,7 @@
   "scripts": {
     "pretest": "npm run lint",
     "test": "mocha",
-    "test:watch": "mocha -w",
+    "test:watch": "npm run test -- -w",
     "lint": "eslint . --ignore-pattern '/initial-concepts/*'"
   },
   "author": "Marty Nelson <marty@martypdx.com>",
@@ -17,5 +17,8 @@
   "devDependencies": {
     "eslint": "^3.14.0",
     "mocha": "^3.2.0"
+  },
+  "dependencies": {
+    "figlet": "^1.2.0"
   }
 }
