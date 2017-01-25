@@ -1,0 +1,19 @@
+{
+  "name": "jan25_database",
+  "version": "1.0.0",
+  "description": "<img src=\"https://cloud.githubusercontent.com/assets/478864/22186847/68223ce6-e0b1-11e6-8a62-0e3edc96725e.png\" width=30>Asynchronous programming (fs database) ===",
+  "main": "event-loop.js",
+  "scripts": {
+    "test": "mocha",
+    "test:debug": "mocha --debug-brk",
+    "test:watch": "mocha -w"
+  },
+  "author": "Marty Nelson <marty@martypdx.com>",
+  "license": "ISC",
+  "dependencies": {
+    "request": "^2.79.0"
+  },
+  "devDependencies": {
+    "mocha": "^3.2.0"
+  }
+}
