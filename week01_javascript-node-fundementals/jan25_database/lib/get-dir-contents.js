@@ -7,12 +7,12 @@ module.exports = function getDirContents(directory, cb) {
 
         const results = [];
         let count = files.length;
-        files.forEach((file) => {
+        files.forEach((file, i) => {
             const fileName = path.join(directory, file); // dir/bar.txt
             fs.readFile(fileName, { encoding: 'utf8' }, (err, content) => {
                 if(err) return cb(err);
                 
-                results.push(content);
+                results[i] = content;
                 count--;
                 if(!count) {
                     cb(null, results);
