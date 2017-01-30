@@ -12,6 +12,11 @@ describe('echo server', () => {
         });
     });
 
+    after(done => {
+        client.end(done);
+        server.close();
+    });
+
     let client;
     before(done => {
         client = net.connect({ port: PORT }, () => {
