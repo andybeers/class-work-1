@@ -25,24 +25,36 @@ describe('bitmap file', () => {
         assert.equal(header.isPaletted, false);
     });
 
-    it('invert transforms correct', () => {
-        // transform the buffer, compare to 
-        // testing "standard" 
-    });
 
-    it('test transform', done /*()*/ => {
+    // "pinning" test, or "snapshot" test
+    it('test whole transform', done /*()*/ => {
+        // use the BitmapTransformer class, passing in the buffer
+        // from the file read.
         const bitmap = new BitmapTransformer(buffer);
+
+        // call transform, which will modify the buffer.
+        // in this api, you pass in a transformation function
         bitmap.transform(invert);
-        // const buffer = fs.readFileSync('./test/output.bmp');
-        assert.deepEqual(bitmap.buffer, buffer);
+
+        // after above step, the buffer has been modified
         
+        // sync version:
+        // const buffer = fs.readFileSync('./test/output.bmp');
+        // assert.deepEqual(bitmap.buffer, buffer);
+        
+        // async version:
+        // read the output file we saved earlier to been
+        // the "standard" expected output file
         fs.readFile('./test/output.bmp', (err, buffer) => {
             assert.deepEqual(bitmap.buffer, buffer);
             done();
         });
+
+        // if you don't have a standard file yet, you could write it out...
+        // fs.writeFile('./test/output.bmp', bitmap.buffer, err => {
+        //     done(err);
+        // });
     });
-
-
 
     describe('transformations', () => {
         it('inverts color', () => {

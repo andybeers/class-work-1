@@ -1,4 +1,5 @@
 const BitmapHeader = require('./bitmap-header');
+const invert = require('./invert-transform');
 
 module.exports = class BitmapTransformer {
     constructor(buffer) {
@@ -31,6 +32,9 @@ module.exports = class BitmapTransformer {
             
             offset += 3;
         }
+    }
 
+    toInverted() {
+        this.transform(invert);
     }
 }
