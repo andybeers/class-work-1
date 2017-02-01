@@ -1,5 +1,6 @@
 const BitmapHeader = require('./bitmap-header');
 const invert = require('./invert-transform');
+const fs = require('fs');
 
 module.exports = class BitmapTransformer {
     constructor(buffer) {
@@ -37,4 +38,19 @@ module.exports = class BitmapTransformer {
     toInverted() {
         this.transform(invert);
     }
+
+    write(filename, cb) {
+        fs.writeFile(filename, this.buffer, err => {
+            if(err) cb(err);
+            else cb();
+        });
+    }
+}
+
+BitmapTransformer.read = function(filename, cb) {
+    fs.readFile(filename, (err, data) => {
+        if(err) return cb(err);
+
+        return new BitmapTransformer(data);
+    })
 }
