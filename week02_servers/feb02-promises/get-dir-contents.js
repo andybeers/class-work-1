@@ -25,3 +25,20 @@ fs.readdir('.')
 // .then(results => console.log(results))
 // // will call catch when any promise rejects
 // .catch(err => console.log('fail', err));
+
+// async function getOrderDetails(orderId) {
+//     try {
+//         const order = await db.find( "orders", orderId );
+//         order.customer = await db.find( "customers", order.customerId );
+//         return order;
+//     }
+//     catch(err) {
+//         res.send()
+//     }
+// }
+// try {
+// //
+// }
+// catch(err){
+// //
+// }
