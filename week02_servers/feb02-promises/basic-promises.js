@@ -7,7 +7,7 @@ const fs = require('fs-promise');
 // readFile('./foo.txt')
 //     .then(data => console.log(data));
 
-// const filename = 'test.txt';
+const filename = 'test.txt';
 
 fs.writeFile(filename, 'This is the file')
     .then(() => {
@@ -16,6 +16,13 @@ fs.writeFile(filename, 'This is the file')
     })
     .then(data => {
         console.log('second chained then', data);
+    });
+
+fs.writeFile(filename, 'This is the file')
+    .then(() => fs.readFile(filename, { encoding: 'utf8' }))
+    .then(contents => contents.toUpperCase())
+    .then(upperCaseContents => {
+        console.log('second chained then', upperCaseContents);
     });
 
 // Promise.resolve(12).then(value => console.log(value));
