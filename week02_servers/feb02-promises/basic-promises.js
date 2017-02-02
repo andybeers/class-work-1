@@ -1,20 +1,27 @@
 const fs = require('fs');
 
-// Expose our functionality, has to be async
 function readFile(filename, cb) {
-    // our function might do work here prior
-    // to calling async API
 
-    // Async API we're consuming
-    fs.readFile(filename, (err, data) => {
-        if(err) cb(err);
-        // or our function might do work here,
-        // prior to returning result
-        else cb(null, data);
+    // create the new Promise and return it.
+    return new Promise((resolve, reject) => {
+        // resolve is the function we should use to return the value
+        // reject is the function we should use, to return an ERROR
+
+        // put the code to execute here
+        fs.readFile(filename, (err, data) => {
+            if(err) reject(err);
+            else resolve(data);
+        });
+
     });
+
 }
 
-readFile('./foo.txt', (err, data) => {
-    if(err) console.log('ERROR!', err);
-    else console.log(data);
-});
+readFile('./foo.txt')
+    // .then takes two arguments:
+    .then(
+        // success handler :)
+        data => console.log(data),
+        // failure handler :(
+        err => console.log('ERROR!', err)
+    );
