@@ -1,8 +1,15 @@
 const express = require('express');
 const app = express();
-const ObjectId = require('mongodb').ObjectID;
+const Pet = require('./models/pet');
 
-const connection = require('./connection');
+// When methods are on the "class",
+// we say it is a "static" method:
+// Pet.find();
+
+// When meethods are on the "instance",
+// we say it is an "instance" method:
+// var pet = new Pet() 
+// pet.save();
 
 const path = require('path');
 const publicPath = path.join(__dirname, '../public');
@@ -10,14 +17,12 @@ const publicPath = path.join(__dirname, '../public');
 app.use(express.static(publicPath));
 
 app.get('/pets', (req, res) => {
-    connection.db.collection('pets')
-        .find().toArray()
+    Pet.find()
         .then(pets => res.send(pets));
 });
 
 app.get('/pets/:id', (req, res) => {
-    connection.db.collection('pets')
-        .findOne({ _id: new ObjectId(req.params.id) })
+    Pet.findById(req.params.id)
         .then(pet => {
             if(!pet) {
                 res.status(404).send({ error: `Id ${req.params.id} Not Found`});
@@ -41,33 +46,29 @@ function parseBody(req) {
 }
 
 app.post('/pets', (req, res) => {
-    parseBody(req).then(pet => {
-        connection.db.collection('pets')
-            .insert(pet)
-            .then(response => response.ops[0])
-            .then(savedPet => res.send(savedPet));
-    });
+    parseBody(req)
+        .then(body => new Pet(body).save())
+        .then(pet => res.send(pet));
 });
 
 app.put('/pets/:id', (req, res) => {
     parseBody(req)
         .then(pet => {
-            pet._id = new ObjectId(pet._id);
-            return connection.db.collection('pets')
-                .findOneAndUpdate(
-                    { _id: pet._id },
-                    pet,
-                    { returnOriginal: false }
-                );
+            return Pet.findByIdAndUpdate(
+                req.params.id,
+                pet, 
+                { new: true, runValidators: true }
+            );
         })
-        .then(updated => res.send(updated.value));
+        .then(pet => {
+            res.send(pet);
+        });
 });
 
 app.delete('/pets/:id', (req, res) => {
-    connection.db.collection('pets')
-        .findOneAndDelete({ _id: new ObjectId(req.params.id) })
-        .then(response => {
-            res.send({ deleted: response.lastErrorObject.n === 1 });
+    Pet.findByIdAndRemove(req.params.id)
+        .then(deleted => {
+            res.send({ deleted: !!deleted });
         });
 });
 

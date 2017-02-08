@@ -1,25 +1,33 @@
-const MongoClient = require('mongodb').MongoClient;
+const mongoose = require('mongoose');
+// Use native Promise for mongoose operations
+mongoose.Promise = Promise;
 
-/* uri for the databse */
-// 'mongodb://localhost:27017/mythical-animals';
-// protocol: mongodb
-// server: localhost (for dev)
-// port: 27107 (default)
-// database name: mythical-animals
+const dbUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/pets';
 
-module.exports = { 
-    db: null,
-    connect(dbUri) {
-        if(this.db) return Promise.reject('Already connected to db');
-        return MongoClient.connect(dbUri)
-            .then(db => this.db = db);
-    },
-    close() {
-        if(!this.db) return Promise.resolve();
-        return this.db.close()
-            .then(result => {
-                this.db = null;
-                return result;
-            });
-    }
-};
+mongoose.connect(dbUri);
+
+// CONNECTION EVENTS
+// When successfully connected
+mongoose.connection.on('connected', function () {  
+    console.log('Mongoose default connection open to ' + dbUri);
+}); 
+
+// If the connection throws an error
+mongoose.connection.on('error',function (err) {  
+    console.log('Mongoose default connection error: ' + err);
+}); 
+
+// When the connection is disconnected
+mongoose.connection.on('disconnected', function () {  
+    console.log('Mongoose default connection disconnected'); 
+});
+
+// If the Node process ends, close the Mongoose connection 
+process.on('SIGINT', function() {  
+    mongoose.connection.close(function () { 
+        console.log( 'Mongoose default connection disconnected through app termination' ); 
+        process.exit(0); 
+    }); 
+});
+
+module.exports = mongoose.connection;

@@ -2,17 +2,16 @@ const chai = require('chai');
 const assert = chai.assert;
 const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
-const connection = require('../lib/connection');
+
+process.env.MONGODB_URI = 'mongodb://localhost:27017/pets-test';
+require('../lib/connection');
+const mongoose = require('mongoose');
 
 const app = require('../lib/app');
 
 describe('pets REST HTTP API', () => {
 
-    const DB_URI = 'mongodb://localhost:27017/pets-test';
-        
-    before(() => connection.connect(DB_URI));
-    before(() => connection.db.dropDatabase());
-    after(() => connection.close());
+    before(() => mongoose.connection.dropDatabase());
 
     const request = chai.request(app);
 
@@ -48,6 +47,7 @@ describe('pets REST HTTP API', () => {
             .then(savedPet => {
                 assert.isOk(savedPet._id);
                 garfield._id = savedPet._id;
+                garfield.__v = 0;
                 assert.deepEqual(savedPet, garfield);
             });
     });

@@ -1,11 +1,6 @@
 const app = require('./lib/app');
-const connection = require('./lib/connection');
+require('./lib/connection');
 const http = require('http');
-
-const DB_URI = 'mongodb://localhost:27017/pets';
-
-connection.connect(DB_URI)
-    .catch(err => console.log('db connection failed:', err));
 
 const server = http.createServer(app);
 

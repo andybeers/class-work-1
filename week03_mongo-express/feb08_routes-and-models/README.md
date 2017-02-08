@@ -29,26 +29,24 @@ knowing how middleware "flows"
 ## Agenda
 
 ### Schemas
-	* Why?
-		* Demo: garbage in/garbage out
-	* Connecting with Mongoose
-	* Schemas
-		* Defining “Properties”
-			* Types and property options
-		* Schema Options
-			* timestamp
-			* required
-			* validation...
-	* Models
-		* schema => model
-		* "service"
-		* Consuming models in routes
-			* Static model methods (`Model.findOne()`)
-			* instance models (`model.save()`)
-	* Testing models
-		* `validate`
-
-[Additional info here](https://github.com/martypdx/workshop-express-middleware)
+* Why?
+	* Demo: garbage in/garbage out
+* Connecting with Mongoose
+* Schemas
+	* Defining “Properties”
+		* Types and property options
+	* Schema Options
+		* timestamp
+		* required
+		* validation...
+* Models
+	* schema => model
+	* "service"
+	* Consuming models in routes
+		* Static model methods (`Model.findOne()`)
+		* instance models (`model.save()`)
+* Testing models
+	* `validate`
 
 ### Middleware
 * What is it?
@@ -69,6 +67,7 @@ knowing how middleware "flows"
 	* Leverage mounting path in app.use
 	* Routers are nestable
 * Middleware error handling
+* [Additional info here](https://github.com/martypdx/workshop-express-middleware)
 
 ### Project Structure
 
