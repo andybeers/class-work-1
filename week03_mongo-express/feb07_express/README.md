@@ -17,6 +17,8 @@ route matching, parameters, and order of routes
 	* just _httpServer_, ie .listen() vs 
 	* http.createServer(app)
 * Serve static assets using `express.static`
+
+Later this week:
 * Server serve rendered pages using ~~`jade`~~ `pug` and `render.view`
 
 ## Overview
