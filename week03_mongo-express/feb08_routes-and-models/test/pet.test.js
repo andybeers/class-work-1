@@ -10,8 +10,9 @@ describe('Pet model', () => {
             favoriteToys: ['swing', 'pond', 'sylvester'],
             legs: 8
         }).validate()
-        .then(pet => console.log(pet))
-        .catch(err => {console.log(err); throw err});
+        .then(pet => console.log(pet));
+        // temp catch to "see" the err
+        // .catch(err => {console.log(err); throw err; });
     });
 
     it('requires name (validation fails when no name)', () => {

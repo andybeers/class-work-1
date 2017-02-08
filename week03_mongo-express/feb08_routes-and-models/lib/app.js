@@ -17,7 +17,10 @@ const publicPath = path.join(__dirname, '../public');
 app.use(express.static(publicPath));
 
 app.get('/pets', (req, res) => {
-    Pet.find()
+    const query = {};
+    if(req.query.type) query.type = req.query.type;
+
+    Pet.find(query)
         .then(pets => res.send(pets));
 });
 
