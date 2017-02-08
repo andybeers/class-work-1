@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "mocha",
-    "test:watch": "mocha -w",
+    "test:api": "mocha test/api",
+    "test:watch": "npm run test -- -w",
     "start": "node server.js",
     "start:watch": "nodemon server.js"
   },

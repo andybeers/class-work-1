@@ -4,10 +4,10 @@ const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 
 process.env.MONGODB_URI = 'mongodb://localhost:27017/pets-test';
-require('../lib/connection');
+require('../../lib/connection');
 const mongoose = require('mongoose');
 
-const app = require('../lib/app');
+const app = require('../../lib/app');
 
 describe('pets REST HTTP API', () => {
 

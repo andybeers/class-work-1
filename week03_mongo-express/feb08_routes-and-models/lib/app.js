@@ -63,6 +63,14 @@ app.put('/pets/:id', (req, res) => {
         .then(pet => {
             res.send(pet);
         });
+
+    // full validation using retrieval and (re)save
+    // Pet.findById(req.params.id)
+    //     .then(pet => {
+    //         pet.name = 'jr';
+    //         return pet.save();
+    //     })
+    //     .then(pet => res.send(pet));
 });
 
 app.delete('/pets/:id', (req, res) => {
