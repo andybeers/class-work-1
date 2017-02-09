@@ -20,12 +20,15 @@ function parseBody(req) {
 }
 
 router
-    .get('/', (req, res) => {
+    .get('/', (req, res, next) => {
         const query = {};
         if(req.query.type) query.type = req.query.type;
 
         Pet.find(query)
-            .then(pets => res.send(pets));
+            .then(pets => res.send(pets))
+            // .catch(err => next(err));
+            // same functionality as above
+            .catch(next);
     })
 
     .get('/:id', (req, res) => {
@@ -44,13 +47,14 @@ router
     .post('/', (req, res, next) => {
         req.favoriteToys = ['snuggy'];
         next();
-    }, (req, res) => {
+    }, (req, res, next) => {
         parseBody(req)
             .then(body => {
                 body.favoriteToys = req.favoriteToys;
-                return new Pet(body).save()
+                return new Pet(body).save();
             })
-            .then(pet => res.send(pet));
+            .then(pet => res.send(pet))
+            .catch(next);
     })
 
     .put('/:id', (req, res) => {

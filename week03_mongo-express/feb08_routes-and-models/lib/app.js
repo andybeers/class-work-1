@@ -26,3 +26,7 @@ app.use('/foo', (req, res, next) => {
 app.use('/foo', (req, res) => {
     res.send('the foo is ' + req.foo);
 });
+
+app.use('/bar', (req, res, next) => {
+    next('no /bar allowed!');
+});
