@@ -1,6 +1,8 @@
 const router = require('express').Router();
+const Actor = require('../models/actor');
 
 module.exports = router
     .get('/', (req, res) => {
-        res.send([{ name: 'james dean', dob: '1/1/1935' }]);
+        Actor.find()
+            .then(actors => res.send(actors));
     });
