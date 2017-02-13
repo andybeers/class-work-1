@@ -13,5 +13,4 @@ module.exports = router
             // TODO: check !actor and send 404
             .then(actor => res.send(actor))
             .catch(next);
-
     });
