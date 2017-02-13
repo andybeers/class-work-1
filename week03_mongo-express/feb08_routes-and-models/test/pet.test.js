@@ -8,11 +8,8 @@ describe('Pet model', () => {
             name: 'tweety',
             type: 'bird',
             favoriteToys: ['swing', 'pond', 'sylvester'],
-            legs: 8
-        }).validate()
-        .then(pet => console.log(pet));
-        // temp catch to "see" the err
-        // .catch(err => {console.log(err); throw err; });
+            legs: 6
+        }).validate();
     });
 
     it('requires name (validation fails when no name)', () => {
