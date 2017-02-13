@@ -2,7 +2,9 @@ const router = require('express').Router();
 const Actor = require('../models/actor');
 
 module.exports = router
-    .get('/', (req, res) => {
+    .get('/', (req, res, next) => {
         Actor.find()
-            .then(actors => res.send(actors));
+            .lean()
+            .then(actors => res.send(actors))
+            .catch(next);
     });
