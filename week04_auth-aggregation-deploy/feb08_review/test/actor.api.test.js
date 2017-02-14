@@ -18,8 +18,15 @@ describe('actor API', () => {
 
     before(() => mongoose.connection.dropDatabase());
 
+    const getCmd = collection => {
+        return `mongoimport --file=./test/${collection}.json -d ripe-banana-test -c ${collection} --jsonArray`;
+    };
+
     before(done => {
-        childProcess.exec('mongoimport --file=./test/actors.json -d ripe-banana-test -c actors --jsonArray', done);
+        childProcess.exec(getCmd('awards'), err => {
+            if(err) return done(err);
+            childProcess.exec(getCmd('actors'), done);
+        });
     });
 
     const request = chai.request(app);
@@ -31,6 +38,10 @@ describe('actor API', () => {
             .then(res => {
                 const clooney = res.body;
                 assert.equal(clooney.name, 'george clooney');
+                const awards = clooney.awards;
+                assert.equal(awards.length, 2);
+                assert.equal(awards[0].name, 'Oscar');
+                assert.equal(awards[1].name, 'People\'s Choice');
             });
     });
 
