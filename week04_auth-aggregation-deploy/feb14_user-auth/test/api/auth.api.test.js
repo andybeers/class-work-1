@@ -76,40 +76,55 @@ describe.only('auth', () => {
                 .then(res => assert.ok(res.body.token))
         );
 
-        // it('token is valid', () =>
-        //     request
-        //         .get('/actors')
-        //         .set('Authorization', `Bearer ${token}`)
-        //         .then(res => assert.ok(res.body))
-        // );
+
+        it('token is invalid', () =>
+            request
+                .get('/auth/verify')
+                .set('Authorization', 'bad token')
+                .then(
+                    () => { throw new Error('success response not expected'); },
+                    (res) => { assert.equal(res.status, 401); }
+                )
+        );
+
+        it('token is valid', () =>
+            request
+                .get('/auth/verify')
+                .set('Authorization', token)
+                .then(res => assert.ok(res.body))
+        );
 
 
     });
 
-    // describe('unauthorized', () => {
+    describe('unauthorized', () => {
 
-    //     it('400 with no token', () => 
-    //         request
-    //             .get('/api/actors')
-    //             .then(res => done('status should not be 200'))
-    //             .catch(res => {
-    //                 assert.equal(res.status, 400);
-    //                 assert.equal(res.response.body.error, 'unauthorized, no token provided');
-    //             })
-    //     );
+        it('401 with no token', () => {
+            return request
+                .get('/actors')
+                .then(
+                    () => { throw new Error('status should not be 200'); },
+                    res => {
+                        assert.equal(res.status, 401);
+                        assert.equal(res.response.body.error, 'Unauthorized');
+                    }
+                );
+        });
 
-    //     it('403 with invalid token', () => 
-    //         request
-    //             .get('/api/actors')
-    //             .set('Authorization', 'Bearer badtoken')
-    //             .then(res => done('status should not be 200'))
-    //             .catch(res => {
-    //                 assert.equal(res.status, 403);
-    //                 assert.equal(res.response.body.error, 'unauthorized, invalid token');  
-    //             })
-    //     );
+        it('403 with invalid token', () => {
+            return request
+                .get('/actors')
+                .set('Authorization', 'badtoken')
+                .then(
+                    () => { throw new Error('status should not be 200'); },
+                    res => {
+                        assert.equal(res.status, 401);
+                        assert.equal(res.response.body.error, 'Unauthorized');
+                    }
+                );
+        });
 
-    // });
+    });
 
     
 });

@@ -4,7 +4,11 @@ const bcrypt = require('bcryptjs');
 
 const userSchema = new Schema({
     username: { type: String, required: true },
-    hash: { type: String, required: true }
+    hash: { type: String, required: true },
+    roles: [{
+        type: String,
+        enum: ['admin']
+    }]
 });
 
 // a mongoose "virtual" property acts like a normal property

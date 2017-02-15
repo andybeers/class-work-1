@@ -11,12 +11,15 @@
 ## Agenda
 
 * Compare:
-    * Authentication
-    * Authorization
+    * Authentication - are you who you say you are?
+		1. signup/in username and password match, or
+		2. user presents a token given to them when #1 happened
+    * Authorization - are you allowed to do operation?
 
 * Manage Users
 	* Sign Up
 	* Sign In
+	* Password handling...
 * Issue Tokens
 	* Keep Users "signed in" - even across new browser
 	* Stateless

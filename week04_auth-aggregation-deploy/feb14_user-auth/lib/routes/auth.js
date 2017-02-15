@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const bodyParser = require('body-parser').json();
 const User = require('../models/user');
+const token = require('../auth/token');
+const ensureAuth = require('../auth/ensure-auth')();
 
 function hasUsernameAndPassword(req, res, next) {
     const user = req.body;
@@ -14,25 +16,29 @@ function hasUsernameAndPassword(req, res, next) {
 }
 
 router
+    .get('/verify', ensureAuth, (req, res) => {
+        res.send({ valid: true });
+    })
     .post('/signup', bodyParser, hasUsernameAndPassword, (req, res, next) => {
-        const user = req.body;
+        const data = req.body;
+        delete req.body;
         
-        User.find({ username: user.username }).count()
+        User.find({ username: data.username }).count()
             .then(count => {
                 if(count > 0) throw {
                     code: 400,
-                    error: `username ${user.username} already exists`
+                    error: `username ${data.username} already exists`
                 };
 
-                return new User(user).save();
+                return new User(data).save();
             })
-            .then(user => {
-                res.send({ token: 123 });
-            })
+            .then(user => token.sign(user))
+            .then(token => res.send({ token }))
             .catch(next);
     })
     .post('/signin', bodyParser, hasUsernameAndPassword, (req, res, next) => {
         const data = req.body;
+        delete req.body;
 
         User.findOne({ username: data.username })
             .then(user => {
@@ -45,9 +51,8 @@ router
 
                 return user;
             })
-            .then(user => {
-                res.send({ token: 123 });
-            })
+            .then(user => token.sign(user))
+            .then(token => res.send({ token }))
             .catch(next);
     });
 

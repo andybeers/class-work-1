@@ -1,7 +1,13 @@
 const router = require('express').Router();
 const Actor = require('../models/actor');
+const bodyParser = require('body-parser').json();
 
 module.exports = router
+    .post('/', bodyParser, (req, res, next) => {
+        new Actor(req.body).save()
+            .then(actor => res.send(actor))
+            .catch(next);
+    })
     .get('/', (req, res, next) => {
         Actor.find()
             .then(actors => res.send(actors))
