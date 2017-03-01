@@ -94,3 +94,4 @@ What's not today?
 ### Lists
 
 * Using `.map()` to handle lists of things
+* Using `key` to map between data and DOM
