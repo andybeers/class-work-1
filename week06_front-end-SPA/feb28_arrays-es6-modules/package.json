@@ -1,0 +1,25 @@
+{
+  "name": "feb28_arrays-es6-modules",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha --compilers js:babel-core/register",
+    "test:watch": "npm test -- -w"
+  },
+  "author": "Marty Nelson <marty@martypdx.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "^6.23.0",
+    "babel-core": "^6.23.1",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.23.0",
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0"
+  },
+  "babel": {
+    "plugins": ["transform-es2015-modules-commonjs"]
+  }
+}

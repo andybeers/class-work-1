@@ -29,13 +29,37 @@ Try it out: https://babeljs.io/repl/
 ### Objects
 * Literal
 	* function shorthand
+	> replace `method: function() {}` with `method() {}`
+
 	* getters/setters
+	> add `get` and/or `set` in front of method name, and it becomes a
+	> property getter or setter:
+	> `get name: function() {}`
+
 	* property/variable shorthand
-* Destructure, Spread, Rest
+	> If you are assigning a variable to a property of an object literal,
+	> and the property should have the same name as the variable, you can omit
+	> the `: value` part:
+	
+	> ```
+	> const first = 'jane';
+	> const last = 'smith';
+	> const person = { first, last }; 
+	> // instead of { first: first, last: last }
+	> ```
+
+* Destructure
 	* Assignment to variable or argument
-	* Property
-	* Array Index
-	* Requires `()` in `=>`
+	* Property: `const { first, last } = person;`
+	* Array Index: `const [x, y, z] = [1, 2, 3];
+	* Always requires parens `()` in arrow function `=>`
+
+* Defaults
+	* `= value`
+
+* Rest and Spread
+	* Array to list of values (arguments)
+	* list of values (arguments) to array
 
 ### `class`
 
