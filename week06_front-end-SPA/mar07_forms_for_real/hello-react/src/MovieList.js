@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class EditableTitle extends Component {
+class EditableField extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -11,11 +11,7 @@ class EditableTitle extends Component {
   }
 
   onDone() {
-    const newMovie = {
-      ...this.props.movie,
-      Title: this.refs.editor.value,
-    }
-    this.props.onEditMovie(newMovie);
+    this.props.onDone(this.refs.editor.value);
     this.setState({ isEditing: false });
   }
 
@@ -30,7 +26,7 @@ class EditableTitle extends Component {
             padding: 10,
           }}
           type='text'
-          defaultValue={this.props.movie.Title}
+          defaultValue={this.props.defaultValue}
           onKeyDown={e => {
             if (e.which === 13) {
               this.onDone()
@@ -45,15 +41,15 @@ class EditableTitle extends Component {
       );
     } else {
       component = (
-        <div
+        <span
           onClick={() => {
             this.setState({ isEditing: true }, () => {
               this.refs.editor.focus();
             });
           }}
         >
-          {this.props.movie.Title}
-        </div>
+          {this.props.children}
+        </span>
       );
     }
 
@@ -65,10 +61,31 @@ const MovieList = props => (
   <ul>
     {props.movies.map(movie =>
       <li key={movie.imdbID}>
-        <EditableTitle
-          movie={movie}
-          onEditMovie={props.onEditMovie}
-        />
+        <EditableField
+          defaultValue={movie.Year}
+          onDone={newValue => {
+            const newMovie = {
+              ...movie,
+              Year: newValue,
+            }
+            props.onEditMovie(newMovie);
+          }}
+        >
+          {movie.Year}
+        </EditableField>
+        &nbsp;&nbsp;-&nbsp;&nbsp;
+        <EditableField
+          defaultValue={movie.Title}
+          onDone={newValue => {
+            const newMovie = {
+              ...movie,
+              Title: newValue,
+            }
+            props.onEditMovie(newMovie);
+          }}
+        >
+          {movie.Title}
+        </EditableField>
       </li>
     )}
   </ul>
