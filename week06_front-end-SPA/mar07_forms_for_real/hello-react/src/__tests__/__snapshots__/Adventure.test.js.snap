@@ -1,0 +1,57 @@
+exports[`Adventure runs my test! 1`] = `
+<div>
+  <Component
+    hitPoints={75} />
+  <Component
+    roomNumber={1} />
+  <ActionToolbar
+    onEscape={[Function]}
+    onFight={[Function]}
+    onWait={[Function]} />
+</div>
+`;
+
+exports[`RoomDisplay does stuff 1`] = `
+<div
+  style={
+    Object {
+      "border": "1px dashed green",
+      "margin": "10px 0",
+      "padding": 20,
+    }
+  }>
+  Currently in room: 
+  1
+  .
+</div>
+`;
+
+exports[`RoomDisplay does stuff 2`] = `
+<div
+  style={
+    Object {
+      "border": "1px dashed green",
+      "margin": "10px 0",
+      "padding": 20,
+    }
+  }>
+  Currently in room: 
+  2
+  .
+</div>
+`;
+
+exports[`RoomDisplay does stuff 3`] = `
+<div
+  style={
+    Object {
+      "border": "1px dashed green",
+      "margin": "10px 0",
+      "padding": 20,
+    }
+  }>
+  Currently in room: 
+  5
+  .
+</div>
+`;
