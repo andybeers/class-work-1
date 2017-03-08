@@ -1,6 +1,14 @@
 <img src="https://cloud.githubusercontent.com/assets/478864/22186847/68223ce6-e0b1-11e6-8a62-0e3edc96725e.png" width=30> Intro to React
 ===
 
+## Our Adventure in React...
+
+* New curriculum for Code Fellows PDX
+* Mutual exploration...
+* Even with hiccups, will be of greater value!
+* Welcome 401d4
+* Welcome Dan Schuman!
+
 ## Background
 
 * Cycle of Thin and Thick Clients
@@ -46,6 +54,8 @@
 	1. Let focus on build or app, but not both. 
 	1. App more relvent to help you care about build system
 	1. Enter `create-react-app`...
+
+
 	
 ## Today's Learning Objectives
 
