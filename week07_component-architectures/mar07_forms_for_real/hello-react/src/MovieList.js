@@ -73,7 +73,9 @@ const MovieList = props => (
         >
           {movie.Year}
         </EditableField>
+
         &nbsp;&nbsp;-&nbsp;&nbsp;
+
         <EditableField
           defaultValue={movie.Title}
           onDone={newValue => {
