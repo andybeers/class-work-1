@@ -2,7 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import ChatApp from './components/ChatApp';
+import ChatApp from './components/ChatApp/ChatApp';
 
 require('normalize.css/normalize.css');
 require('@blueprintjs/core/dist/blueprint.css');
