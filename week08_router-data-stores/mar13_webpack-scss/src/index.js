@@ -1,13 +1,8 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
+import App from './components/App';
+import './main.scss';
 
-const App = ({name}) => (
-  <div>Hello {name}</div>
-);
-
-App.propTypes = {
-    name: PropTypes.string
-};
 
 ReactDOM.render(
   <App name="Portland" />,
