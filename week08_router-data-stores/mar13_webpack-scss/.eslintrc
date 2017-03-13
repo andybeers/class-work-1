@@ -1,0 +1,40 @@
+{
+    "parserOptions": {
+		"ecmaVersion": 6,
+		"sourceType": "module",
+		"ecmaFeatures": {
+			"modules": true,
+			"impliedStrict": true,
+            "jsx": true
+		}
+	},
+    "env": {
+        "node": true,
+        "mocha": true,
+        "es6": true,
+        "browser": true
+    },
+    "plugins": [
+        "react"
+    ],
+    "extends": ["eslint:recommended", "plugin:react/recommended"],
+    "rules": {
+        "no-console": "off",
+        "indent": [
+            "error",
+            4
+        ],
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ]
+    }
+}

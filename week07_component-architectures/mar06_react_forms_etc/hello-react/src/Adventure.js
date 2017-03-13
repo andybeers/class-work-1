@@ -13,6 +13,7 @@ const SuperFightButton = props => {
   );
 };
 
+
 const HeroDisplay = ({ hitPoints }) => {
   return (
     <div
@@ -53,6 +54,10 @@ ActionToolbar.propTypes = {
 function ActionToolbar(props) {
   return (
     <div>
+      <Room 
+        key={this.state.roomNumber}
+        room={rooms[this.state.roomNumber]}
+      />
       <SuperFightButton damageTaken={2} onSuperFight={props.onFight} />
       <button onClick={props.onEscape}>Escape</button>
       <button onClick={() => props.onWait(5)}>Take a break!</button>
@@ -116,3 +121,31 @@ export {
   RoomDisplay,
   adder,
 };
+
+
+class App extends Component {
+
+  render() {
+    const number = this.state.roomNumber;
+    const roomCount = this.props.rooms.length;
+
+    if(number > roomCount) {
+      return // win or lose
+    }
+
+    let room = this.props.rooms[number];
+    if (!room) {
+      room = {
+        message: 'the message',
+        buttonA: this.state.selection[0],
+        buttonB: this.state.selection[0]
+      }
+    }
+
+    return (
+      <div>
+        <Room key={number} room={room} onSelect={this.onSelect} />
+      </div>
+    )
+  }
+}
