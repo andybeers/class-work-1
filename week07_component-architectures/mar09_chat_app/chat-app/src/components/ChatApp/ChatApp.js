@@ -1,30 +1,35 @@
 // eslint-disable-next-line no-unused-vars
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 
 import RoomList from '../RoomList/RoomList';
 import RoomListLayout from '../RoomList/RoomListLayout';
 import RoomAdder from '../RoomAdder/RoomAdder';
 import ActiveRoom from '../ActiveRoom/ActiveRoom';
 import fetcher from '../../helpers/fetcher';
+import {
+  increment,
+  receiveAllRooms,
+  setActiveRoomId,
+  setMessages,
+} from '../../reducer';
 
 require('./ChatApp.css');
 
-export default class ChatApp extends Component {
+const mapStateToProps = (state) => ({
+  roomsById: state.roomsById,
+  allRooms: state.allRooms,
+  messages: state.messages,
+  activeRoomId: state.activeRoomId,
+});
+
+class ChatApp extends Component {
   static propTypes = {
   }
 
-  state = {
-    roomsById: {},
-    allRooms: [],
-    messages: [],
-    activeRoomId: null,
-  }
-
   onSelectRoom(roomId) {
-    this.setState({
-      activeRoomId: roomId,
-      messages: [],
-    }, () => this.doFetch());
+    this.props.dispatch(setActiveRoomId(roomId));
+    this.doFetch();
   }
 
   onAddRoom(roomName) {
@@ -48,12 +53,13 @@ export default class ChatApp extends Component {
   onNewMessage(newMessage) {
     fetcher({
       method: 'POST',
-      path: `/rooms/${this.state.activeRoomId}/messages`,
+      path: `/rooms/${this.props.activeRoomId}/messages`,
       body: {
         message: newMessage,
         author: 'Anonymous',
       }
     });
+    this.props.dispatch(increment(1));
     this.doFetch();
   }
 
@@ -64,22 +70,18 @@ export default class ChatApp extends Component {
     })
     .then(r => r.json())
     .then(rooms => {
-      const roomsById = rooms.reduce(
-        (acc, val) => ({ ...acc, [val.id]: val }),
-        {}
-      );
-      const allRooms = rooms.map(room => room.id);
-      this.setState({ roomsById, allRooms, });
+
+      this.props.dispatch(receiveAllRooms(rooms));
     });
 
-    if (this.state.activeRoomId) {
+    if (this.props.activeRoomId) {
       fetcher({
-        path: `/rooms/${this.state.activeRoomId}/messages`,
+        path: `/rooms/${this.props.activeRoomId}/messages`,
         method: 'GET',
       })
       .then(r => r.json())
       .then(messages =>
-        this.setState({ messages, })
+        this.props.dispatch(setMessages(messages))
       );
     }
   }
@@ -99,8 +101,8 @@ export default class ChatApp extends Component {
   }
 
   render() {
-    const allRooms = this.state.allRooms.map(id => this.state.roomsById[id]);
-    const activeRoom = this.state.roomsById[this.state.activeRoomId];
+    const allRooms = this.props.allRooms.map(id => this.props.roomsById[id]);
+    const activeRoom = this.props.roomsById[this.props.activeRoomId];
 
     return (
       <div className='chat-app'>
@@ -117,10 +119,12 @@ export default class ChatApp extends Component {
 
         <ActiveRoom
           room={activeRoom}
-          messages={this.state.messages}
+          messages={this.props.messages}
           onNewMessage={this.onNewMessage.bind(this)}
         />
       </div>
     );
   }
 }
+
+export default connect(mapStateToProps)(ChatApp);

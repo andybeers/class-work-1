@@ -1,9 +1,15 @@
 // eslint-disable-next-line no-unused-vars
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 
-export default class MessageInput extends Component {
+const mapStateToProps = (state) => ({
+  messageCount: state.count,
+});
+
+class MessageInput extends Component {
   constructor(props) {
     super(props);
+    console.log(props);
     this.state = {
       messageValue: '',
     };
@@ -32,7 +38,11 @@ export default class MessageInput extends Component {
             placeholder='Write a new message'
           />
         </form>
+        <div>Messages Sent: {this.props.messageCount}</div>
       </div>
     );
   }
 }
+
+const connectedMessageInput = connect(mapStateToProps)(MessageInput);
+export default connectedMessageInput;
