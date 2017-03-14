@@ -19,23 +19,26 @@ function incrementReducer(state, action) {
   };
 }
 
+function allRoomsReducer(state, action) {
+  const rooms = action.payload;
+  const roomsById = rooms.reduce(
+    (acc, val) => ({ ...acc, [val.id]: val }),
+    {}
+  );
+
+  const allRooms = rooms.map(room => room.id);
+
+  return {
+    ...state,
+    roomsById,
+    allRooms,
+  };
+}
+
 export default function toplevelReducer(state = initialState, action) {
   switch (action.type) {
-    case RECEIVE_ALL_ROOMS: {
-      const rooms = action.payload;
-      const roomsById = rooms.reduce(
-        (acc, val) => ({ ...acc, [val.id]: val }),
-        {}
-      );
-
-      const allRooms = rooms.map(room => room.id);
-
-      return {
-        ...state,
-        roomsById,
-        allRooms,
-      };
-    }
+    case RECEIVE_ALL_ROOMS:
+      return allRoomsReducer(state, action);
 
     case SET_ACTIVE_ROOM_ID: {
       return {

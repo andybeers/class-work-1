@@ -1,9 +1,15 @@
 // eslint-disable-next-line no-unused-vars
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 
 import MessageInput from './MessageInput';
 
-export default class ActiveRoom extends Component {
+const mapStateToProps = (state) => ({
+  room: state.roomsById[state.activeRoomId],
+  messages: state.messages,
+});
+
+class ActiveRoom extends Component {
   static propTypes = {
     room: PropTypes.shape({
       title: PropTypes.string.isRequired,
@@ -13,7 +19,8 @@ export default class ActiveRoom extends Component {
       id: PropTypes.number.isRequired,
       message: PropTypes.string.isRequired,
       author: PropTypes.string.isRequired,
-    }))
+    })),
+    onNewMessage: PropTypes.func.isRequired,
   }
 
   render() {
@@ -41,3 +48,5 @@ export default class ActiveRoom extends Component {
     );
   }
 }
+
+export default connect(mapStateToProps)(ActiveRoom);

@@ -17,9 +17,6 @@ import {
 require('./ChatApp.css');
 
 const mapStateToProps = (state) => ({
-  roomsById: state.roomsById,
-  allRooms: state.allRooms,
-  messages: state.messages,
   activeRoomId: state.activeRoomId,
 });
 
@@ -101,26 +98,14 @@ class ChatApp extends Component {
   }
 
   render() {
-    const allRooms = this.props.allRooms.map(id => this.props.roomsById[id]);
-    const activeRoom = this.props.roomsById[this.props.activeRoomId];
-
     return (
       <div className='chat-app'>
         <RoomListLayout>
-          <RoomList
-            rooms={allRooms}
-            onSelectRoom={this.onSelectRoom.bind(this)}
-          />
-
-          <RoomAdder
-            onAddRoom={this.onAddRoom.bind(this)}
-          />
+          <RoomList onSelectRoom={this.onSelectRoom.bind(this)}/>
+          <RoomAdder onAddRoom={this.onAddRoom.bind(this)} />
         </RoomListLayout>
 
-        <ActiveRoom
-          room={activeRoom}
-          messages={this.props.messages}
-          onNewMessage={this.onNewMessage.bind(this)}
+        <ActiveRoom onNewMessage={this.onNewMessage.bind(this)}
         />
       </div>
     );

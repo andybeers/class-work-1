@@ -1,9 +1,14 @@
 // eslint-disable-next-line no-unused-vars
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 
 require('./RoomList.css');
 
-export default class RoomList extends Component {
+const mapStateToProps = (state) => ({
+  rooms: state.allRooms.map(id => state.roomsById[id]),
+});
+
+class RoomList extends Component {
   static propTypes = {
     rooms: PropTypes.arrayOf(PropTypes.shape({
       title: PropTypes.string.isRequired,
@@ -15,7 +20,11 @@ export default class RoomList extends Component {
       const room = props.room;
       const roomId = room.id;
       return (
-        <a className='room-link' href='#' onClick={() => this.props.onSelectRoom(roomId)}>
+        <a
+          className='room-link'
+          href='#'
+          onClick={() => this.props.onSelectRoom(roomId)}
+        >
           {room.title}
         </a>
       );
@@ -30,3 +39,5 @@ export default class RoomList extends Component {
     );
   }
 }
+
+export default connect(mapStateToProps)(RoomList);
