@@ -6,10 +6,14 @@ export default class MessageInput extends Component {
     super(props);
     this.state = {
       messageValue: '',
-    }
+    };
   }
   static propTypes = {
     onNewMessage: PropTypes.func.isRequired,
+  }
+
+  componentDidMount() {
+    this.refs.messageInput.focus();
   }
 
   render() {
@@ -21,6 +25,7 @@ export default class MessageInput extends Component {
           this.setState({ messageValue: '', });
         }}>
           <input
+            ref='messageInput'
             value={this.state.messageValue}
             onChange={e => this.setState({ messageValue: e.target.value })}
             type='text'

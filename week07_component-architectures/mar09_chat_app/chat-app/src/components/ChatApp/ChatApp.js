@@ -2,6 +2,8 @@
 import React, { Component, PropTypes } from 'react';
 
 import RoomList from '../RoomList/RoomList';
+import RoomListLayout from '../RoomList/RoomListLayout';
+import RoomAdder from '../RoomAdder/RoomAdder';
 import ActiveRoom from '../ActiveRoom/ActiveRoom';
 import fetcher from '../../helpers/fetcher';
 
@@ -14,7 +16,45 @@ export default class ChatApp extends Component {
   state = {
     roomsById: {},
     allRooms: [],
+    messages: [],
     activeRoomId: null,
+  }
+
+  onSelectRoom(roomId) {
+    this.setState({
+      activeRoomId: roomId,
+      messages: [],
+    }, () => this.doFetch());
+  }
+
+  onAddRoom(roomName) {
+    let newRoomId;
+    fetcher({
+      path: '/rooms',
+      method: 'POST',
+      body: { title: roomName, },
+    })
+      .then(r => r.json())
+      .then(room => {
+        newRoomId = room.id;
+
+        // Fetch all rooms
+        return this.doFetch();
+      })
+      // After all rooms have been fetched, switch to new room.
+      .then(allRooms => this.onSelectRoom(newRoomId));
+  }
+
+  onNewMessage(newMessage) {
+    fetcher({
+      method: 'POST',
+      path: `/rooms/${this.state.activeRoomId}/messages`,
+      body: {
+        message: newMessage,
+        author: 'Anonymous',
+      }
+    });
+    this.doFetch();
   }
 
   doFetch() {
@@ -31,9 +71,24 @@ export default class ChatApp extends Component {
       const allRooms = rooms.map(room => room.id);
       this.setState({ roomsById, allRooms, });
     });
+
+    if (this.state.activeRoomId) {
+      fetcher({
+        path: `/rooms/${this.state.activeRoomId}/messages`,
+        method: 'GET',
+      })
+      .then(r => r.json())
+      .then(messages =>
+        this.setState({ messages, })
+      );
+    }
   }
 
   componentDidMount() {
+    // Kick it off, right off the bat!
+    this.doFetch();
+
+    // Then, do the timer
     this._timerId = setInterval(() => {
       this.doFetch();
     }, 2000);
@@ -49,17 +104,22 @@ export default class ChatApp extends Component {
 
     return (
       <div className='chat-app'>
-        <RoomList
-          rooms={allRooms}
-          onSelectRoom={roomId => {
-            // Do something!
-            this.setState({
-              activeRoomId: roomId,
-            });
-          }}
-        />
+        <RoomListLayout>
+          <RoomList
+            rooms={allRooms}
+            onSelectRoom={this.onSelectRoom.bind(this)}
+          />
 
-        <ActiveRoom room={activeRoom} />
+          <RoomAdder
+            onAddRoom={this.onAddRoom.bind(this)}
+          />
+        </RoomListLayout>
+
+        <ActiveRoom
+          room={activeRoom}
+          messages={this.state.messages}
+          onNewMessage={this.onNewMessage.bind(this)}
+        />
       </div>
     );
   }

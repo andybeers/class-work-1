@@ -2,8 +2,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Button, Dialog, } from '@blueprintjs/core';
 
-import fetcher from '../../helpers/fetcher';
-
 export default class RoomAdder extends Component {
   constructor(props) {
     super(props);
@@ -14,16 +12,7 @@ export default class RoomAdder extends Component {
   }
 
   static propTypes = {
-
-  }
-
-  addRoom(roomName = 'Unnamed Room') {
-    // TODO: Trim string and test for empty room name
-    fetcher({
-      path: '/rooms',
-      method: 'POST',
-      body: { title: roomName, },
-    });
+    onAddRoom: PropTypes.func.isRequired,
   }
 
   render() {
@@ -36,7 +25,7 @@ export default class RoomAdder extends Component {
           <form onSubmit={(e) => {
             e.preventDefault();
             const roomName = this.refs.nameInput.value;
-            this.addRoom(roomName);
+            this.props.onAddRoom(roomName);
             this.setState({ isRoomAdderOpen: false, });
           }}>
             <input
