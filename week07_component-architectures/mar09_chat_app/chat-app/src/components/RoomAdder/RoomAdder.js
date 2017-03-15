@@ -17,17 +17,20 @@ export default class RoomAdder extends Component {
 
   render() {
     return (
-      <div>
+      <div style={{ marginTop: 10 }}>
         <Dialog
           isOpen={this.state.isRoomAdderOpen}
           onClose={() => this.setState({ isRoomAdderOpen: false, })}
         >
-          <form onSubmit={(e) => {
-            e.preventDefault();
-            const roomName = this.refs.nameInput.value;
-            this.props.onAddRoom(roomName);
-            this.setState({ isRoomAdderOpen: false, });
-          }}>
+          <form
+            style={{ margin: 10 }}
+            onSubmit={(e) => {
+              e.preventDefault();
+              const roomName = this.refs.nameInput.value;
+              this.props.onAddRoom(roomName);
+              this.setState({ isRoomAdderOpen: false, });
+            }}
+          >
             <input
               required
               ref='nameInput'
