@@ -11,6 +11,7 @@ import {
   increment,
   receiveAllRooms,
   setActiveRoomId,
+  doFetchAction,
   setMessages,
 } from '../../reducer';
 
@@ -61,26 +62,20 @@ class ChatApp extends Component {
   }
 
   doFetch() {
-    fetcher({
-      path: '/rooms',
-      method: 'GET',
-    })
-    .then(r => r.json())
-    .then(rooms => {
+    const ourSimpleThunkCreator = (activeRoomId) => {
+      return (dispatch, getState) => {
+        console.log('Hello!', activeRoomId);
+        dispatch({ type: 'SOME_FAKE_ACTION' });
+      };
+    };
 
-      this.props.dispatch(receiveAllRooms(rooms));
-    });
+    this.props.dispatch(
+      ourSimpleThunkCreator(this.props.activeRoomId)
+    );
 
-    if (this.props.activeRoomId) {
-      fetcher({
-        path: `/rooms/${this.props.activeRoomId}/messages`,
-        method: 'GET',
-      })
-      .then(r => r.json())
-      .then(messages =>
-        this.props.dispatch(setMessages(messages))
-      );
-    }
+    this.props.dispatch(
+      doFetchAction(this.props.activeRoomId)
+    );
   }
 
   componentDidMount() {
@@ -88,9 +83,9 @@ class ChatApp extends Component {
     this.doFetch();
 
     // Then, do the timer
-    this._timerId = setInterval(() => {
-      this.doFetch();
-    }, 2000);
+    // this._timerId = setInterval(() => {
+    //   this.doFetch();
+    // }, 2000);
   }
 
   componentWillUnmount() {
@@ -105,8 +100,7 @@ class ChatApp extends Component {
           <RoomAdder onAddRoom={this.onAddRoom.bind(this)} />
         </RoomListLayout>
 
-        <ActiveRoom onNewMessage={this.onNewMessage.bind(this)}
-        />
+        <ActiveRoom onNewMessage={this.onNewMessage.bind(this)} />
       </div>
     );
   }

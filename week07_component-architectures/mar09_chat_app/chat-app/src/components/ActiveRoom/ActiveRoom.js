@@ -26,22 +26,16 @@ class ActiveRoom extends Component {
   render() {
     const room = this.props.room;
 
-    const RoomWrapper = props => (
-      <div style={{ padding: 10 }}>
-        {props.children}
-      </div>
-    );
-
     if (!room) {
       return (
-        <RoomWrapper>
+        <div style={{ padding: 10 }}>
           <div>No room selected.</div>
-        </RoomWrapper>
+        </div>
       );
     }
 
     return (
-      <RoomWrapper>
+      <div style={{ padding: 10 }}>
         {this.props.messages && this.props.messages.map(m =>
           <div key={m.id}>{m.author}: {m.message}</div>
         )}
@@ -52,7 +46,7 @@ class ActiveRoom extends Component {
           key={room.id}
           onNewMessage={this.props.onNewMessage}
         />
-      </RoomWrapper>
+      </div>
     );
   }
 }

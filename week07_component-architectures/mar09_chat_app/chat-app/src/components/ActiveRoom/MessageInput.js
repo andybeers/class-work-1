@@ -9,11 +9,11 @@ const mapStateToProps = (state) => ({
 class MessageInput extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = {
       messageValue: '',
     };
   }
+
   static propTypes = {
     onNewMessage: PropTypes.func.isRequired,
   }

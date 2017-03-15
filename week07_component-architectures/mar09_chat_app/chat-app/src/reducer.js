@@ -1,3 +1,5 @@
+import fetcher from './helpers/fetcher';
+
 const initialState = {
   count: 0,
   roomsById: {},
@@ -82,9 +84,15 @@ export const decrement = (amount) => ({
   payload: amount,
 });
 
-export const receiveAllRooms = (rooms) => ({
+export const receiveAllRooms = () => ({
   type: RECEIVE_ALL_ROOMS,
-  payload: rooms,
+  promise:
+    fetcher({
+      path: '/rooms',
+      method: 'GET',
+    })
+    .then(r => r.json()),
+
 });
 
 export const setActiveRoomId = (roomId) => ({
@@ -96,3 +104,20 @@ export const setMessages = (messages) => ({
   type: SET_MESSAGES,
   payload: messages,
 });
+
+export const doFetchAction = (activeRoomId) => {
+  return (dispatch, getState) => {
+    dispatch(receiveAllRooms());
+
+    if (activeRoomId) {
+      fetcher({
+        path: `/rooms/${activeRoomId}/messages`,
+        method: 'GET',
+      })
+      .then(r => r.json())
+      .then(messages =>
+        dispatch(setMessages(messages))
+      );
+    }
+  };
+};
