@@ -1,5 +1,5 @@
-import todos from './todos'
-import * as types from '../constants/ActionTypes'
+import todos from './todos';
+import * as types from '../constants/ActionTypes';
 
 describe('todos reducer', () => {
   it('should handle initial state', () => {
@@ -11,8 +11,8 @@ describe('todos reducer', () => {
         completed: false,
         id: 0
       }
-    ])
-  })
+    ]);
+  });
 
   it('should handle ADD_TODO', () => {
     expect(
@@ -26,7 +26,7 @@ describe('todos reducer', () => {
         completed: false,
         id: 0
       }
-    ])
+    ]);
 
     expect(
       todos([
@@ -49,7 +49,7 @@ describe('todos reducer', () => {
         completed: false,
         id: 0
       }
-    ])
+    ]);
 
     expect(
       todos([
@@ -80,8 +80,8 @@ describe('todos reducer', () => {
         completed: false,
         id: 0
       }
-    ])
-  })
+    ]);
+  });
 
   it('should handle DELETE_TODO', () => {
     expect(
@@ -105,8 +105,8 @@ describe('todos reducer', () => {
         completed: false,
         id: 0
       }
-    ])
-  })
+    ]);
+  });
 
   it('should handle EDIT_TODO', () => {
     expect(
@@ -135,8 +135,8 @@ describe('todos reducer', () => {
         completed: false,
         id: 0
       }
-    ])
-  })
+    ]);
+  });
 
   it('should handle COMPLETE_TODO', () => {
     expect(
@@ -164,8 +164,8 @@ describe('todos reducer', () => {
         completed: false,
         id: 0
       }
-    ])
-  })
+    ]);
+  });
 
   it('should handle COMPLETE_ALL', () => {
     expect(
@@ -192,7 +192,7 @@ describe('todos reducer', () => {
         completed: true,
         id: 0
       }
-    ])
+    ]);
 
     // Unmark if all todos are currently completed
     expect(
@@ -219,8 +219,8 @@ describe('todos reducer', () => {
         completed: false,
         id: 0
       }
-    ])
-  })
+    ]);
+  });
 
   it('should handle CLEAR_COMPLETED', () => {
     expect(
@@ -243,8 +243,8 @@ describe('todos reducer', () => {
         completed: false,
         id: 0
       }
-    ])
-  })
+    ]);
+  });
 
   it('should not generate duplicate ids after CLEAR_COMPLETED', () => {
     expect(
@@ -279,6 +279,6 @@ describe('todos reducer', () => {
         completed: false,
         id: 1
       }
-    ])
-  })
-})
+    ]);
+  });
+});

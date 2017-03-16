@@ -1,5 +1,5 @@
-import React, { Component, PropTypes } from 'react'
-import classnames from 'classnames'
+import React, { Component, PropTypes } from 'react';
+import classnames from 'classnames';
 
 export default class TodoTextInput extends Component {
   static propTypes = {
@@ -15,22 +15,22 @@ export default class TodoTextInput extends Component {
   }
 
   handleSubmit = e => {
-    const text = e.target.value.trim()
+    const text = e.target.value.trim();
     if (e.which === 13) {
-      this.props.onSave(text)
+      this.props.onSave(text);
       if (this.props.newTodo) {
-        this.setState({ text: '' })
+        this.setState({ text: '' });
       }
     }
   }
 
   handleChange = e => {
-    this.setState({ text: e.target.value })
+    this.setState({ text: e.target.value });
   }
 
   handleBlur = e => {
     if (!this.props.newTodo) {
-      this.props.onSave(e.target.value)
+      this.props.onSave(e.target.value);
     }
   }
 
@@ -41,13 +41,13 @@ export default class TodoTextInput extends Component {
           edit: this.props.editing,
           'new-todo': this.props.newTodo
         })}
-        type="text"
+        type='text'
         placeholder={this.props.placeholder}
-        autoFocus="true"
+        autoFocus='true'
         value={this.state.text}
         onBlur={this.handleBlur}
         onChange={this.handleChange}
         onKeyDown={this.handleSubmit} />
-    )
+    );
   }
 }
