@@ -23,7 +23,6 @@ export default class MainSection extends Component {
 
   handleShow = filter => {
     this.props.history.push(filter);
-    // this.setState({ filter });
   }
 
   renderToggleAll(completedCount) {
@@ -40,7 +39,7 @@ export default class MainSection extends Component {
 
   renderFooter(completedCount) {
     const { todos } = this.props;
-    const filter = this.props.match.path.substring(1);
+    const filter = this.props.match.params.filter;
     const activeCount = todos.length - completedCount;
 
     if (todos.length) {
@@ -56,7 +55,7 @@ export default class MainSection extends Component {
 
   render() {
     const { todos, actions } = this.props;
-    const filter = this.props.match.path.substring(1);
+    const filter = this.props.match.params.filter;
 
     const filteredTodos = todos.filter(TODO_FILTERS[filter]);
     const completedCount = todos.reduce((count, todo) =>

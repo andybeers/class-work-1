@@ -13,9 +13,7 @@ render(
   <Provider store={store}>
     <BrowserRouter>
       <Switch>
-        <Route path='/all' component={App} />
-        <Route path='/active' component={App} />
-        <Route path='/completed' component={App} />
+        <Route path='/:filter(active|completed|all)' component={App} />
         <Redirect to='/all' />
       </Switch>
     </BrowserRouter>
