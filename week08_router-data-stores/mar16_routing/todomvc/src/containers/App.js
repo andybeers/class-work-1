@@ -5,10 +5,10 @@ import Header from '../components/Header';
 import MainSection from '../components/MainSection';
 import * as TodoActions from '../actions';
 
-const App = ({ todos, actions }) => (
+const App = ({ todos, actions, history, match }) => (
   <div>
     <Header addTodo={actions.addTodo} />
-    <MainSection todos={todos} actions={actions} />
+    <MainSection match={match} history={history} todos={todos} actions={actions} />
   </div>
 );
 
