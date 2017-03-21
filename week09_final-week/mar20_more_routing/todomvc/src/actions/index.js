@@ -12,6 +12,8 @@ export const login = (email, password) => ({
   password,
 });
 
+export const logout = () => ({ type: types.LOGOUT, });
+
 export const setLogin = isLoggedIn => ({
   type: types.SET_LOGIN,
   isLoggedIn,

@@ -17,7 +17,15 @@ const logoutStyle = {
 const App = ({ todos, actions, history, match }) => (
   <div>
     <div style={logoutStyle}>
-      <button type='button'>Logout</button>
+      <button
+        onClick={() => {
+          actions.logout();
+          localStorage.setItem('isLoggedIn', 'false');
+        }}
+        type='button'
+      >
+        Logout
+      </button>
     </div>
 
     <Header addTodo={actions.addTodo} />
@@ -35,7 +43,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(TodoActions, dispatch)
+  actions: bindActionCreators(TodoActions, dispatch),
 });
 
 export default connect(

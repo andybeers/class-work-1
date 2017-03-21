@@ -1,4 +1,4 @@
-import { LOGIN, SET_LOGIN } from '../constants/ActionTypes';
+import { LOGIN, LOGOUT, SET_LOGIN } from '../constants/ActionTypes';
 
 const initialState = {
   isLoggedIn: false,
@@ -13,10 +13,17 @@ export default function todos(state = initialState, action) {
         ...state,
         isLoggedIn: action.isLoggedIn,
       };
+
     case LOGIN:
       return {
         ...state,
         isLoggedIn: true,
+      };
+
+    case LOGOUT:
+      return {
+        ...state,
+        isLoggedIn: false,
       };
 
     default:
