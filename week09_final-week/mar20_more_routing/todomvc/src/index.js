@@ -10,7 +10,7 @@ import Login from './containers/Login';
 import reducer from './reducers';
 import PrivateRoute from './PrivateRoute';
 import UnauthedRoute from './UnauthedRoute';
-import { setLogin } from './actions';
+import { hydrateAuth } from './actions';
 
 import 'todomvc-app-css/index.css';
 
@@ -24,8 +24,8 @@ const store = createStore(
 );
 
 // Populate redux store before app starts
-const isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn'));
-store.dispatch(setLogin(isLoggedIn));
+const token = localStorage.getItem('token');
+store.dispatch(hydrateAuth(token));
 
 render(
   <Provider store={store}>

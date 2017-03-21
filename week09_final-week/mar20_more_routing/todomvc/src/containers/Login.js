@@ -10,14 +10,12 @@ class Login extends Component {
 
   onLogin(e) {
     e.preventDefault();
+    const username = this.refs.email.value;
+    const password = this.refs.password.value;
 
-    // Kick off state change to say we're logged in
-    this.props.dispatch(login(
-      this.refs.email.value,
-      this.refs.password.value
-    ));
+    const loginThunk = login(username, password);
 
-    localStorage.setItem('isLoggedIn', 'true');
+    this.props.dispatch(loginThunk);
   }
 
   render() {

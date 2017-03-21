@@ -20,7 +20,6 @@ const App = ({ todos, actions, history, match }) => (
       <button
         onClick={() => {
           actions.logout();
-          localStorage.setItem('isLoggedIn', 'false');
         }}
         type='button'
       >
