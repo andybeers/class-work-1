@@ -2,3 +2,32 @@ div.app {
   flex-direction: row;
   padding: 25px;
 }
+
+.example {
+  background-color: blue;
+  color: white;
+  padding: 5px;
+  border: 1px solid black;
+  margin: 5px 0;
+}
+
+.example-enter {
+  opacity: 0.01;
+  background-color: red;
+}
+
+.example-enter.example-enter-active {
+  opacity: 1;
+  background-color: blue;
+  transition: all 500ms ease-in;
+}
+
+.example-leave {
+  opacity: 1;
+}
+
+.example-leave.example-leave-active {
+  opacity: 0.01;
+  background-color: red;
+  transition: all 1300ms ease-in;
+}
